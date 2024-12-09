@@ -1,0 +1,37 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Empleados</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>
+        <ion-button routerLink="/empleado-create">
+          <ion-icon slot="start" name="add"></ion-icon> Crear Empleado
+        </ion-button>
+      </ion-card-subtitle>
+      <ion-card-title>
+        <ion-searchbar
+          placeholder="Buscar por RUC"
+          (ionInput)="filtrarEmpleado($event)"
+        ></ion-searchbar>
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <!-- Mostrar empleados filtrados -->
+        <ion-item *ngFor="let empleado of empleados_filtrados">
+          <ion-label>
+            RUC: {{ empleado.ruc }} - Fecha de Ingreso: {{ empleado.fecha }} - 
+            Hijos: {{ empleado.numhijos }} - Sueldo: {{ empleado.sueldo | currency }} - 
+            Profesión: {{ empleado.profesion }}
+          </ion-label>
+         
+      
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

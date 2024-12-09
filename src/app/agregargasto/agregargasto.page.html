@@ -1,0 +1,45 @@
+<form [formGroup]="registrarForm" (ngSubmit)="onSubmit()">
+  <!-- Campo Titulo -->
+  <ion-item>
+    <ion-label position="floating">Título</ion-label>
+    <ion-input formControlName="titulo"></ion-input>
+  </ion-item>
+  <ng-container *ngFor="let validation of validation_messages.titulo">
+    <small class="error-message"
+      *ngIf="registrarForm.get('titulo')?.hasError(validation.type) &&
+      (registrarForm.get('titulo')?.dirty || registrarForm.get('titulo')?.touched)">
+      {{ validation.message }}
+    </small>
+  </ng-container>
+
+  <!-- Campo Monto -->
+  <ion-item>
+    <ion-label position="floating">Monto</ion-label>
+    <ion-input type="number" formControlName="monto"></ion-input>
+  </ion-item>
+  <ng-container *ngFor="let validation of validation_messages.monto">
+    <small class="error-message"
+      *ngIf="registrarForm.get('monto')?.hasError(validation.type) &&
+      (registrarForm.get('monto')?.dirty || registrarForm.get('monto')?.touched)">
+      {{ validation.message }}
+    </small>
+  </ng-container>
+
+  <!-- Campo Categoria -->
+  <ion-item>
+    <ion-label position="floating">Categoría</ion-label>
+    <ion-input formControlName="categoria"></ion-input>
+  </ion-item>
+  <ng-container *ngFor="let validation of validation_messages.categoria">
+    <small class="error-message"
+      *ngIf="registrarForm.get('categoria')?.hasError(validation.type) &&
+      (registrarForm.get('categoria')?.dirty || registrarForm.get('categoria')?.touched)">
+      {{ validation.message }}
+    </small>
+  </ng-container>
+
+  <!-- Botón de Guardar o Actualizar -->
+  <ion-button [disabled]="!registrarForm.valid" type="submit" expand="block" padding color="primary" class="ion-margin-top">
+    {{ edit ? 'Actualizar' : 'Guardar' }}
+  </ion-button>
+</form>

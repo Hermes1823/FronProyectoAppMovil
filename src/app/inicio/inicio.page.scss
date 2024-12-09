@@ -1,0 +1,35 @@
+.inicio-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  
+    .container {
+      padding: 10px; /* Espaciado interno */
+      flex: 1; /* Ocupa el espacio disponible */
+      display: flex;
+      align-items: center;
+      justify-content: center; /* Centra el contenido dentro del contenedor */
+    }
+  
+    .texto-container {
+      background-color: #f0f0f0; /* Color de fondo del primer contenedor */
+      text-align: center; /* Centra el texto */
+    }
+  
+    .button-container {
+      background-color: #ffffff; /* Color de fondo de los botones */
+    }
+  
+    .imagen-container {
+      flex: 1; /* Hace que este contenedor ocupe la mitad del espacio del body */
+      height: 50%; /* Establece la altura del contenedor de la imagen */
+      overflow: hidden; /* Asegura que la imagen no se salga del contenedor */
+      background-color:#fdfefe;
+    }
+  
+    .imagen {
+      width: 100%; /* Imagen ocupa todo el ancho del contenedor */
+      height: 100%; /* Mantiene la proporción de la imagen */
+    }
+  }
+  
