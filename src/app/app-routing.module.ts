@@ -64,7 +64,31 @@ const routes: Routes = [
   {
     path: 'gast',
     loadChildren: () => import('./gast/gast.module').then( m => m.GastPageModule)
+  },  {
+    path: 'trip',
+    loadChildren: () => import('./trip/trip.module').then( m => m.TripPageModule)
+  },
+  {
+    path: 'trip-modal',
+    loadChildren: () => import('./trip-modal/trip-modal.module').then( m => m.TripModalPageModule)
+  },
+  {
+    path: 'work',
+    loadChildren: () => import('./work/work.module').then( m => m.WorkPageModule)
+  },
+  {
+    path: 'work-modal',
+    loadChildren: () => import('./work-modal/work-modal.module').then( m => m.WorkModalPageModule)
+  },
+  {
+    path: 'report',
+    loadChildren: () => import('./report/report.module').then( m => m.ReportPageModule)
+  },
+  {
+    path: 'report-modal',
+    loadChildren: () => import('./report-modal/report-modal.module').then( m => m.ReportModalPageModule)
   }
+
  
 
 ];

@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Obras</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="openModal('create')">Nuevo</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Obra</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-list>
+    <ion-item *ngFor="let work of works">
+      <ion-label>
+        <h2>{{ work.name }}</h2>
+        <p>{{ work.location }}</p>
+      </ion-label>
+      <ion-buttons slot="end">
+        <ion-button (click)="openModal('edit', work)">Editar</ion-button>
+        <ion-button (click)="downloadPdf(work.id)">Descargar</ion-button>
+        <ion-button color="danger" (click)="deleteWork(work.id)">Eliminar</ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
+</ion-content>

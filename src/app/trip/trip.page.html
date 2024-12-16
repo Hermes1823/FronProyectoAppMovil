@@ -1,0 +1,35 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Viajes</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="openModal('create')">Nuevo</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Viaje</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <app-chart 
+    [chartType]="'bar'" 
+    [chartData]="chartData" 
+    [chartLabels]="chartLabels" 
+    [chartOptions]="chartOptions">
+  </app-chart>
+  <ion-list>
+    <ion-item *ngFor="let trip of trips">
+      <ion-label>
+        <h2>{{ trip.destination }}</h2>
+        <p>{{ trip.description }}</p>
+      </ion-label>
+      <ion-buttons slot="end">
+        <ion-button (click)="openModal('edit', trip)">Editar</ion-button>
+        <ion-button (click)="downloadPdf(trip.id)">Descargar</ion-button>
+        <ion-button color="danger" (click)="deleteTrip(trip.id)">Eliminar</ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
+</ion-content>
