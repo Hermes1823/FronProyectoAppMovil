@@ -1,0 +1,38 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>ReportModal</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="close()">Cancelar</ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button expand="block" (click)="saveReport()">
+        {{ action === 'create' ? 'Registrar' : 'Actualizar' }}
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-item>
+    <ion-label position="floating">Título</ion-label>
+    <ion-input [(ngModel)]="report.title"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Contenido</ion-label>
+    <ion-input [(ngModel)]="report.content"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Viaje</ion-label>
+    <ion-select [(ngModel)]="report.trip_id">
+      <ion-select-option *ngFor="let trip of trips" [value]="trip.id">{{ trip.destination }}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Obra</ion-label>
+    <ion-select [(ngModel)]="report.work_id">
+      <ion-select-option *ngFor="let work of works" [value]="work.id">{{ work.name }}</ion-select-option>
+    </ion-select>
+  </ion-item>
+</ion-content>

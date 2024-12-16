@@ -1,0 +1,40 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>WorkModal</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="close()">Cancelar</ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button expand="block" (click)="saveWork()">
+        {{ action === 'create' ? 'Registrar' : 'Actualizar' }}
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-item>
+    <ion-label position="floating">Nombre</ion-label>
+    <ion-input [(ngModel)]="work.name"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Locación</ion-label>
+    <ion-input [(ngModel)]="work.location"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Fecha de Inicio</ion-label>
+    <ion-datetime
+      [(ngModel)]="work.start_date"
+      presentation="date"
+      placeholder="Selecciona una fecha">
+    </ion-datetime>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Fecha de Fin</ion-label>
+    <ion-datetime
+      [(ngModel)]="work.end_date"
+      presentation="date"
+      placeholder="Selecciona una fecha">
+    </ion-datetime>
+  </ion-item>
+</ion-content>
