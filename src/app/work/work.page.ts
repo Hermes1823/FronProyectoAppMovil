@@ -14,7 +14,7 @@ export class WorkPage implements OnInit {
   constructor(private workService: WorkService, private modalController: ModalController) {}
 
   ngOnInit() {
-    this.loadWorks
+    this.loadWorks()
   }
 
   loadWorks() {

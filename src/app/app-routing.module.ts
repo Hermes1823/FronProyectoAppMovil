@@ -87,6 +87,14 @@ const routes: Routes = [
   {
     path: 'report-modal',
     loadChildren: () => import('./report-modal/report-modal.module').then( m => m.ReportModalPageModule)
+  },
+  {
+    path: 'detalle-gasto',
+    loadChildren: () => import('./detalle-gasto/detalle-gasto.module').then( m => m.DetalleGastoPageModule)
+  },
+  {
+    path: 'detalle-gasto-modal',
+    loadChildren: () => import('./detalle-gasto-modal/detalle-gasto-modal.module').then( m => m.DetalleGastoModalPageModule)
   }
 
  

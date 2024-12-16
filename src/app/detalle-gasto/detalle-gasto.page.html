@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Detalle de Gasto</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="openModal('create')">Nuevo</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Detalle de Gasto</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-list>
+    <ion-item *ngFor="let detallegasto of detallegastos">
+      <ion-label>
+        <h2>{{ detallegasto.Monto }}</h2>
+        <p>{{ detallegasto.Fecha }}</p>
+      </ion-label>
+      <ion-buttons slot="end">
+        <ion-button (click)="openModal('edit', detallegasto)">Editar</ion-button>
+        <ion-button (click)="downloadPdf(detallegasto.id)">Descargar</ion-button>
+        <ion-button color="danger" (click)="delete(detallegasto.id)">Eliminar</ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
+</ion-content>
