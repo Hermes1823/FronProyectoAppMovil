@@ -10,46 +10,11 @@ import { TripModalPage } from '../trip-modal/trip-modal.page';
 })
 export class TripPage implements OnInit {
   trips: Trip[] = []
-  
-  chartData: any[] = [];
-  chartLabels: string[] = [];
-  chartOptions = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: 'top',
-      },
-    },
-    scales: {
-      x: {
-        title: {
-          display: true,
-          text: 'Mes',
-        },
-      },
-      y: {
-        title: {
-          display: true,
-          text: 'Total Trabajos',
-        },
-        beginAtZero: true,
-      },
-    },
-  };
 
   constructor(private tripService: TripService, private modalController: ModalController) {}
 
   ngOnInit() {
     this.loadTrips()
-
-    this.tripService.getChartData().subscribe((response: any) => {
-      this.chartData = response.chartData.map((item: any) => ({
-        name: item.month,
-        value: item.total,
-      }));
-      this.chartLabels = response.chartData.map((item: any) => item.month);
-    });
-
   }
 
   loadTrips() {
