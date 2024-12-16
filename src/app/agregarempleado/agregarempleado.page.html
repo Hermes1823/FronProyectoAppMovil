@@ -1,0 +1,42 @@
+<form [formGroup]="registrarForm" (ngSubmit)="onSubmit()">
+  <ion-item>
+    <ion-label position="floating">Nombre</ion-label>
+    <ion-input formControlName="Nombre"></ion-input>
+  </ion-item>
+  <ng-container *ngFor="let validation of validation_messages.Nombre">
+    <small class="error-message"
+      *ngIf="registrarForm.get('Nombre')?.hasError(validation.type) &&
+      (registrarForm.get('Nombre')?.dirty || registrarForm.get('Nombre')?.touched)">
+      {{ validation.message }}
+    </small>
+  </ng-container>
+
+  <ion-item>
+    <ion-label position="floating">Telefono</ion-label>
+    <ion-input formControlName="Telefono"></ion-input>
+  </ion-item>
+  <ng-container *ngFor="let validation of validation_messages.Telefono">
+    <small class="error-message"
+      *ngIf="registrarForm.get('Telefono')?.hasError(validation.type) &&
+      (registrarForm.get('Telefono')?.dirty || registrarForm.get('Telefono')?.touched)">
+      {{ validation.message }}
+    </small>
+  </ng-container>
+
+  <ion-item>
+    <ion-label position="floating">Cargo</ion-label>
+    <ion-input formControlName="Cargo"></ion-input>
+  </ion-item>
+  <ng-container *ngFor="let validation of validation_messages.Cargo">
+    <small class="error-message"
+      *ngIf="registrarForm.get('Cargo')?.hasError(validation.type) &&
+      (registrarForm.get('Cargo')?.dirty || registrarForm.get('Cargo')?.touched)">
+      {{ validation.message }}
+    </small>
+  </ng-container>
+  
+  <ion-button [disabled]="!registrarForm.valid" type="submit" expand="block" padding color="primary" class="ion-margin-top">
+    {{ edit ? 'Actualizar' : 'Guardar' }}
+  </ion-button>
+  
+</form>

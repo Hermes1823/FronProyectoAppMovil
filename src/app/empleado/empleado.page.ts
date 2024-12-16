@@ -1,7 +1,8 @@
-import { EmpleadoService } from './../services/empleado.service';
-import { EmpleadoModel } from './../models/empleado.model';// Asegúrate de que la ruta es correcta
-
+import { EmpleadoModel } from './../models/empleado.model';
 import { Component, OnInit } from '@angular/core';
+import { EmpleadoService } from '../services/empleado.service';
+import { AlertController, ModalController } from '@ionic/angular';
+import { AgregarempleadoPage } from '../agregarempleado/agregarempleado.page';
 
 @Component({
   selector: 'app-empleado',
@@ -10,43 +11,78 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmpleadoPage implements OnInit {
 
-  empleados: EmpleadoModel[] = []; // Aquí se almacenan todos los empleados
-  empleados_filtrados: EmpleadoModel[] = []; // Aquí se almacenan los empleados filtrados
-
-  constructor(private service: EmpleadoService) { }
-
-  ngOnInit() {
-    this.getAll(); // Cargar todos los empleados al inicio
-  }
-
-  ionViewWillEnter() {
-    this.getAll(); // Recargar empleados cuando se navegue a esta página
-  }
-
-  // Obtener todos los empleados
-  getAll() {
-    this.service.ObtenerTodos().subscribe(
-      (response: any) => {
-        this.empleados = response; // Almacenamos todos los empleados
-        this.empleados_filtrados = response; // Inicializamos la lista filtrada con todos los empleados
-      }
-    );
-  }
-
-  // Filtrar empleados por RUC
-  filtrarEmpleado(event: any) {
-    const valorBusqueda = event.target.value.toLowerCase(); // Obtener la consulta del searchbar
-
-    if (valorBusqueda && valorBusqueda.trim() !== '') {
-      // Filtrar los empleados que coincidan con el RUC ingresado
-      this.empleados_filtrados = this.empleados.filter((empleado) => {
-        return empleado.ruc.toString().includes(valorBusqueda); // Buscamos por el RUC
-      });
-    } else {
-      // Si no hay búsqueda, mostramos todos los empleados
-      this.empleados_filtrados = this.empleados;
-    }
-  }
-
+ empleados: EmpleadoModel[] | undefined;
+ 
+   constructor(private service: EmpleadoService,
+     private modalCtrl: ModalController) { }
+ 
+   ngOnInit() {
+ 
+     this.obtenerEmpleados();
+   }
+ 
+   obtenerEmpleados(){
+ 
+     this.service.ObtenerTodos().subscribe(response => {
+       this.empleados = response;
+     });
+   }
+ 
+   async Agregar() {
+     const modal = await this.modalCtrl.create({
+       component: AgregarempleadoPage,
+       cssClass: 'my-custom-class'  // Opcional: puedes agregar una clase CSS personalizada
+     });
+ 
+     modal.onDidDismiss().then((data) => {
+       // Verifica si se ha creado un nuevo producto
+       if (data.data && data.data !== 'cerrado') {
+         this.empleados?.push(data.data);  // Agrega el nuevo producto a la lista
+       }
+     });
+ 
+     return await modal.present();
+   }
+ 
+   loadEmpleados() {
+     this.service.ObtenerTodos().subscribe(
+       response => {
+         this.empleados = response;
+       },
+       error => {
+         console.error('Error al obtener empleados:', error);
+       }
+     );
+   }
+ 
+   async openEditModal(empleado: EmpleadoModel) {
+     console.log('Abriendo modal para editar al empleado:', empleado);
+     const modal = await this.modalCtrl.create({
+       component: AgregarempleadoPage,
+       componentProps: {
+         empleado: empleado, // Asegúrate de que aquí estás pasando el producto correcto
+         edit: true // Establece la variable edit como true
+       }
+     });
+   
+     modal.onDidDismiss().then((result) => {
+       // Maneja el resultado del modal aquí
+     });
+   
+     return await modal.present();
+   }
+   
+   // Método para abrir el modal en modo edición
+   editEmpleado(empleado: EmpleadoModel) {
+     this.openEditModal(empleado);
+   }
+ 
+ 
+   eliminarEmpleado(id: number) {
+     this.service.Eliminar(id).subscribe(() => {
+       this.obtenerEmpleados(); // Recargar la lista después de eliminar
+     });
+   }
+ 
  
 }

@@ -1,0 +1,83 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Gestión de Detalles de Viajes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Formulario para agregar/editar detalles -->
+  <form (ngSubmit)="guardarDetalleViaje()">
+    <ion-item>
+      <ion-label position="stacked">Id Viaje</ion-label>
+      <ion-input
+        type="number"
+        [(ngModel)]="detalleViaje.IdViaje"
+        name="IdViaje"
+        required
+      ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Id Empleado</ion-label>
+      <ion-input
+        type="number"
+        [(ngModel)]="detalleViaje.IdEmpleado"
+        name="IdEmpleado"
+        required
+      ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Fecha de Salida</ion-label>
+      <ion-datetime
+        [(ngModel)]="detalleViaje.FechaSalida"
+        name="FechaSalida"
+        displayFormat="yyyy-MM-dd"
+        required
+      ></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Fecha de Regreso</ion-label>
+      <ion-datetime
+        [(ngModel)]="detalleViaje.FechaRegreso"
+        name="FechaRegreso"
+        displayFormat="yyyy-MM-dd"
+        required
+      ></ion-datetime>
+    </ion-item>
+
+    <ion-button expand="block" type="submit" color="primary">
+      {{ detalleViaje.IdViaje && detalleViaje.IdEmpleado ? 'Actualizar' : 'Agregar' }} Detalle
+    </ion-button>
+  </form>
+
+  <!-- Tabla de detalles -->
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Id Viaje</th>
+        <th>Id Empleado</th>
+        <th>Fecha Salida</th>
+        <th>Fecha Regreso</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let detalle of detallesViajes">
+        <td>{{ detalle.IdViaje }}</td>
+        <td>{{ detalle.IdEmpleado }}</td>
+        <td>{{ detalle.FechaSalida }}</td>
+        <td>{{ detalle.FechaRegreso }}</td>
+        <td>
+          <ion-button size="small" color="warning" (click)="editarDetalle(detalle)">
+            Editar
+          </ion-button>
+          <ion-button size="small" color="danger" (click)="eliminarDetalle(detalle.IdViaje, detalle.IdEmpleado)">
+            Eliminar
+          </ion-button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</ion-content>

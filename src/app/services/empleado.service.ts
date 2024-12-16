@@ -5,23 +5,25 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EmpleadoService {
-
-  constructor(private http: HttpClient) { }
-
   private url = 'http://localhost:8000/api/empleado';
-
+  constructor(private http: HttpClient) {}
 
   // Método para obtener todas las categorías
-  ObtenerTodos(){
+  ObtenerTodos() {
     return this.http.get<[EmpleadoModel]>(this.url);
-    }
+  }
+  Agregar(empleado: EmpleadoModel) {
+    return this.http.post(this.url, empleado);
+  }
 
-     // Obtener todos los empleados
- 
+  Editar(empleado: EmpleadoModel, id: number): Observable<EmpleadoModel> {
+    return this.http.put<EmpleadoModel>(`${this.url}/${id}`, empleado);
+  }
 
+  Eliminar(id: number) {
+    return this.http.delete(this.url + '/' + id);
+  }
 }
-
-

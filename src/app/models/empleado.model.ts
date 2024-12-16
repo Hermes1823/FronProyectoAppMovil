@@ -1,4 +1,3 @@
-import { EmpleadoPageRoutingModule } from './../empleado/empleado-routing.module';
 export interface EmpleadoModel {
     IdEmpleado: number
     ruc: number;
