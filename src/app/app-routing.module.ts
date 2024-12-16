@@ -64,7 +64,23 @@ const routes: Routes = [
   {
     path: 'gast',
     loadChildren: () => import('./gast/gast.module').then( m => m.GastPageModule)
+  },  {
+    path: 'agregarempleado',
+    loadChildren: () => import('./agregarempleado/agregarempleado.module').then( m => m.AgregarempleadoPageModule)
+  },
+  {
+    path: 'viaje',
+    loadChildren: () => import('./viaje/viaje.module').then( m => m.ViajePageModule)
+  },
+  {
+    path: 'agregarviaje',
+    loadChildren: () => import('./agregarviaje/agregarviaje.module').then( m => m.AgregarviajePageModule)
+  },
+  {
+    path: 'detalleviaje',
+    loadChildren: () => import('./detalleviaje/detalleviaje.module').then( m => m.DetalleviajePageModule)
   }
+
  
 
 ];

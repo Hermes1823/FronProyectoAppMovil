@@ -1,0 +1,19 @@
+<form [formGroup]="registrarForm" (ngSubmit)="onSubmit()">
+  <ion-item>
+    <ion-label position="floating">Destino</ion-label>
+    <ion-input formControlName="Destino"></ion-input>
+  </ion-item>
+  <ng-container *ngFor="let validation of validation_messages.Destino">
+    <small class="error-message"
+      *ngIf="registrarForm.get('Destino')?.hasError(validation.type) &&
+      (registrarForm.get('Destino')?.dirty || registrarForm.get('Destino')?.touched)">
+      {{ validation.message }}
+    </small>
+  </ng-container>
+
+  <ion-button [disabled]="!registrarForm.valid" type="submit" expand="block" padding color="primary" class="ion-margin-top">
+    {{ edit ? 'Actualizar' : 'Guardar' }}
+  </ion-button>
+
+</form>
+
