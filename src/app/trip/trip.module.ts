@@ -7,7 +7,6 @@ import { IonicModule } from '@ionic/angular';
 import { TripPageRoutingModule } from './trip-routing.module';
 
 import { TripPage } from './trip.page';
-import { ChartComponent } from '../chart/chart.component';
 
 @NgModule({
   imports: [
@@ -16,6 +15,6 @@ import { ChartComponent } from '../chart/chart.component';
     IonicModule,
     TripPageRoutingModule
   ],
-  declarations: [TripPage, ChartComponent]
+  declarations: [TripPage]
 })
 export class TripPageModule {}
